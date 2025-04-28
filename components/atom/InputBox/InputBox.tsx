@@ -1,5 +1,5 @@
-import React from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
+import React from "react";
+import { StyleSheet, TextInput, View } from "react-native";
 import {
   useRestyle,
   composeRestyleFunctions,
@@ -7,25 +7,25 @@ import {
   spacing,
   border,
   backgroundColor,
-} from '@shopify/restyle';
-import {Theme} from '../../../theme';
-import {palette} from '../../../theme/elements';
-import {Box} from '../Box';
-import {Text} from '../Text';
-import {Row} from '../Row';
-import {RestyleInputProps, TextInputProps} from './types';
-import {FONTS} from '../../../theme/fonts';
+} from "@shopify/restyle";
+import { Theme } from "../../../theme";
+import { palette } from "../../../theme/elements";
+import { Box } from "../Box";
+import { Text } from "../Text";
+import { Row } from "../Row";
+import { RestyleInputProps, TextInputProps } from "./types";
+import { FONTS } from "../../../theme/fonts";
 
 export const InputBox: React.FC<TextInputProps> = React.memo(
   ({
     onChangeText,
     value,
-    placeholder = '',
+    placeholder = "",
     isSecureTextEntry = false,
     placeholderTextColor,
     inputStyle,
     inputType,
-    capitalizationMode = 'none',
+    capitalizationMode = "none",
     isEditable,
     textMaxLength,
     hasShowPasswordOption,
@@ -40,7 +40,7 @@ export const InputBox: React.FC<TextInputProps> = React.memo(
     onBlur,
     label,
     error,
-    labelColor = 'black',
+    labelColor = "black",
     multiline,
     ...rest
   }) => {
@@ -74,8 +74,9 @@ export const InputBox: React.FC<TextInputProps> = React.memo(
           style={[
             styles.container,
             props.style,
-            error ? {borderColor: 'red'} : {},
-          ]}>
+            error ? { borderColor: "red" } : {},
+          ]}
+        >
           <TextInput
             onChangeText={onChangeText}
             value={value}
@@ -100,24 +101,24 @@ export const InputBox: React.FC<TextInputProps> = React.memo(
         </View>
       </Box>
     );
-  },
+  }
 );
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: "100%",
     height: 60,
     borderWidth: 1,
     borderColor: palette.black,
     borderRadius: 8,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   input: {
     fontSize: 14,
     color: palette.black,
-    width: '100%',
+    width: "100%",
     padding: 16,
     // fontFamily: FONTS.body,
   },

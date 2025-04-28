@@ -1,19 +1,15 @@
-import { useAuth } from "@/hooks/useAuth";
-import { router } from "expo-router";
-import { Text, View } from "react-native";
+import { KeyboardAwareView, Screen } from "@/components/atom";
+import { SigninScreen } from "@/components/screens/onboarding";
+import React, { useState } from "react";
 
-export default function SignIn() {
-  const { authenticate } = useAuth();
+const Signin = () => {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text
-        onPress={() => {
-          authenticate("accessToken");
-          router.replace("/");
-        }}
-      >
-        Sign In
-      </Text>
-    </View>
+    <KeyboardAwareView>
+      <Screen name="Home">
+        <SigninScreen />
+      </Screen>
+    </KeyboardAwareView>
   );
-}
+};
+
+export default Signin;
