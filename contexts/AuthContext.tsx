@@ -12,7 +12,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     isAuthenticated: false,
     accessToken: "",
   });
-  const [userData, setUserData] = useState<any | null>(null);
 
   const authenticate = useCallback(async (accessToken: string) => {
     try {
@@ -36,15 +35,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       accessToken: "",
     });
     await AsyncStorage.removeItem("accessToken");
-    setUserData(null);
   }, []);
 
   const value = {
     authState,
     authenticate,
     signOut,
-    userData,
-    setUserData,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

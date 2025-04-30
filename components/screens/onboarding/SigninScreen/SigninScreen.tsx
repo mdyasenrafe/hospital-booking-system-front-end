@@ -4,14 +4,20 @@ import { Box, RemoteImage, Text } from "@/components/atoms";
 import { useAuth } from "@/hooks";
 import Logo from "../../../../assets/images/logo.png";
 import { SigninForm } from "@/components/organisms";
-import { TSigninPayload, useLoginMutation } from "@/redux/features/auth";
+import {
+  addUser,
+  TSigninPayload,
+  useLoginMutation,
+} from "@/redux/features/auth";
 import { useGlobalSnackbars } from "@/contexts/SnackbarContext";
 import { router } from "expo-router";
+import { useAppDispatch } from "@/redux";
 
 export const SigninScreen = () => {
   const { addErrorSnackbar, addSuccessSnackbar } = useGlobalSnackbars();
+  const dispatch = useAppDispatch();
   const [error, setError] = useState<string>("");
-  const { authenticate, setUserData, authState } = useAuth();
+  const { authenticate } = useAuth();
   const [login, { isLoading }] = useLoginMutation();
 
   const handleSignin = async (values: TSigninPayload) => {
@@ -19,7 +25,9 @@ export const SigninScreen = () => {
       setError("");
       const response = await login(values).unwrap();
       if (response?.data) {
-        setUserData(response.data);
+        dispatch(
+          addUser({ user: response?.data, token: response?.token as string })
+        );
         await authenticate(response?.token as string);
         addSuccessSnackbar({
           message: "Login successful!",

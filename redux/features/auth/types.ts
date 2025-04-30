@@ -3,10 +3,10 @@ export type TUser = {
   name: string;
   email: string;
   password: string;
-  role: "user" | "admin";
   createdAt: string;
   updatedAt: string;
-  status: "active" | "inactive" | "pending" | "deleted";
+  role: "admin" | "user";
+  status: "active" | "deleted";
   __v: number;
 };
 

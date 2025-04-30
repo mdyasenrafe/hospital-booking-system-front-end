@@ -4,22 +4,30 @@ import { Box, RemoteImage, Text } from "@/components/atoms";
 import { useAuth } from "@/hooks";
 import Logo from "../../../../assets/images/logo.png";
 import { SignupForm } from "@/components/organisms";
-import { TSignupPayload, useSignupMutation } from "@/redux/features/auth";
+import {
+  addUser,
+  TSignupPayload,
+  useSignupMutation,
+} from "@/redux/features/auth";
 import { useGlobalSnackbars } from "@/contexts/SnackbarContext";
 import { router } from "expo-router";
+import { useAppDispatch } from "@/redux";
 
 export const SignupScreen = () => {
   const { addErrorSnackbar, addSuccessSnackbar } = useGlobalSnackbars();
   const [error, setError] = useState<string>("");
-  const { authenticate, setUserData } = useAuth();
+  const { authenticate } = useAuth();
   const [signup, { isLoading }] = useSignupMutation();
+  const dispatch = useAppDispatch();
 
   const handleSignup = async (values: TSignupPayload) => {
     try {
       setError("");
       const response = await signup(values).unwrap();
       if (response?.data) {
-        setUserData(response.data);
+        dispatch(
+          addUser({ user: response?.data, token: response?.token as string })
+        );
         authenticate(response?.token as string);
         addSuccessSnackbar({ message: "Account created successfully!" });
       }
