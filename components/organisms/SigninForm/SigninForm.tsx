@@ -2,14 +2,14 @@ import React, { useState, useCallback } from "react";
 import EyeIcon from "../../../assets/icons/auth/eyeIcon.svg";
 import EyeOffIcon from "../../../assets/icons/auth/eyeOffIcon.svg";
 import { Formik } from "formik";
-import { TUser } from "@/contexts/types";
 import { Button, Row, Text, TouchableOpacity } from "@/components/atom";
 import { FormInputBox } from "@/components/forms";
 import { SigninValidationSchema } from "@/schema";
-import { Link, useRouter } from "expo-router";
+import { Link } from "expo-router";
+import { TSigninPayload } from "@/redux/features/auth";
 
 type SigninFormProps = {
-  handleSignin: (values: TUser) => void;
+  handleSignin: (values: TSigninPayload) => void;
   isLoading: boolean;
   isDisabled: boolean;
   error: string;
@@ -21,9 +21,7 @@ export const SigninForm: React.FC<SigninFormProps> = ({
   isDisabled,
   error,
 }) => {
-  const router = useRouter();
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [isRemembered, setIsRemembered] = useState<boolean>(false);
 
   const togglePasswordVisibility = useCallback(() => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -44,7 +42,7 @@ export const SigninForm: React.FC<SigninFormProps> = ({
       {({ handleSubmit, isValid, dirty }) => (
         <>
           <FormInputBox
-            name="Email"
+            name="email"
             label="Email"
             placeholder="Type your Email"
             placeholderTextColor="gray"

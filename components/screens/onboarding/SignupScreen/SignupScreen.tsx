@@ -4,19 +4,32 @@ import { Box, RemoteImage, Text } from "@/components/atom";
 import { useAuth } from "@/hooks";
 import Logo from "../../../../assets/images/logo.png";
 import { SignupForm } from "@/components/organisms";
-
-type SignupFormValues = {};
+import { TSignupPayload, useSignupMutation } from "@/redux/features/auth";
+import { useGlobalSnackbars } from "@/contexts/SnackbarContext";
+import { router } from "expo-router";
 
 export const SignupScreen = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { addErrorSnackbar, addSuccessSnackbar } = useGlobalSnackbars();
   const [error, setError] = useState<string>("");
   const { authenticate, setUserData } = useAuth();
+  const [signup, { isLoading }] = useSignupMutation();
 
-  const handleSignup = (values: SignupFormValues) => {
-    setIsLoading(true);
-    setError("");
-
-    // You can handle signup logic here (e.g., API call, etc.)
+  const handleSignup = async (values: TSignupPayload) => {
+    try {
+      setError("");
+      const response = await signup(values).unwrap();
+      if (response?.data) {
+        setUserData(response.data);
+        authenticate(response?.token as string);
+        addSuccessSnackbar({ message: "Account created successfully!" });
+      }
+      router.replace("/(app)");
+    } catch (err: any) {
+      console.error(err);
+      const message = err?.data?.message || "Something went wrong!";
+      setError(message);
+      addErrorSnackbar({ message });
+    }
   };
 
   return (

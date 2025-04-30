@@ -1,7 +1,7 @@
-import React, {useState, useCallback, memo} from 'react';
-import {useField} from 'formik';
-import {InputBox} from '../../atom/InputBox';
-import {TextInputProps} from '../../atom/InputBox/types';
+import React, { useState, useCallback, memo } from "react";
+import { useField } from "formik";
+import { InputBox } from "../../atom/InputBox";
+import { TextInputProps } from "../../atom/InputBox/types";
 
 type FormInputBoxProps = TextInputProps & {
   name: string;
@@ -16,11 +16,10 @@ const FormInputBoxComponent: React.FC<FormInputBoxProps> = ({
 
   const handleChange = useCallback(
     (value: string) => {
-      console.log('calling form input box', name);
       if (showError) setShowError(false);
       helpers.setValue(value);
     },
-    [showError, helpers],
+    [showError, helpers]
   );
 
   const handleBlur = useCallback(() => {

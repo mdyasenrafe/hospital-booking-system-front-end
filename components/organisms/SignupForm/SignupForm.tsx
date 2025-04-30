@@ -7,9 +7,10 @@ import { TUser } from "@/contexts/types";
 import EyeIcon from "../../../assets/icons/auth/eyeIcon.svg";
 import EyeOffIcon from "../../../assets/icons/auth/eyeOffIcon.svg";
 import { Link } from "expo-router";
+import { TSignupPayload } from "@/redux/features/auth";
 
 type SignupFormProps = {
-  handleSignup: (values: TUser) => void;
+  handleSignup: (values: TSignupPayload) => void;
   isLoading: boolean;
   error: string;
 };
@@ -66,6 +67,7 @@ export const SignupForm: React.FC<SignupFormProps> = ({
             paddingRight="lg"
             marginTop="lg"
             height={54}
+            showPasswordToggleComponent={passwordToggleComponent}
           />
           {error && (
             <Text color="red" mt="lg">

@@ -2,7 +2,7 @@ import { RootState } from "@/redux/store";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://budget-buddy-tracker-server.vercel.app/api",
+  baseUrl: "https://task-hospital.vercel.app/api",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
     if (token) {
@@ -17,5 +17,5 @@ export const baseApi = createApi({
   reducerPath: "baseapi",
   baseQuery: baseQuery,
   endpoints: () => ({}),
-  tagTypes: ["CardOverview", "Card", "Budget", "Transaction"],
+  tagTypes: [],
 });

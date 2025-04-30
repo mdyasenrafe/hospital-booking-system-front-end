@@ -20,7 +20,6 @@ export const useAuthCheck = () => {
   }, [authenticate]);
 
   useEffect(() => {
-    console.log("useeffect from useAuthCheck.ts");
     checkAuthentication();
   }, [checkAuthentication]);
 

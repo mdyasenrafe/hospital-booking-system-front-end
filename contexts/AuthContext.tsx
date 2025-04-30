@@ -14,17 +14,20 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   });
   const [userData, setUserData] = useState<any | null>(null);
 
-  console.log("authcontext.tsx file");
-
-  // Memoize the authenticate function
   const authenticate = useCallback(async (accessToken: string) => {
-    console.log("authenticated calling");
-    saveTokenToAsyncStorage("accessToken", accessToken);
-    setAuthState((prevState) => ({
-      ...prevState,
-      accessToken,
-      isAuthenticated: true,
-    }));
+    try {
+      await saveTokenToAsyncStorage("accessToken", accessToken);
+
+      setAuthState((prevState) => {
+        return {
+          ...prevState,
+          accessToken,
+          isAuthenticated: true,
+        };
+      });
+    } catch (error) {
+      console.error("Error in authenticate:", error); // Debug log
+    }
   }, []);
 
   const signOut = useCallback(async () => {

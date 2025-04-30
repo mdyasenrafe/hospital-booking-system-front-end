@@ -4,18 +4,35 @@ import { Box, RemoteImage, Text } from "@/components/atom";
 import { useAuth } from "@/hooks";
 import Logo from "../../../../assets/images/logo.png";
 import { SigninForm } from "@/components/organisms";
-
-type SigninFormValues = {};
+import { TSigninPayload, useLoginMutation } from "@/redux/features/auth";
+import { useGlobalSnackbars } from "@/contexts/SnackbarContext";
+import { router } from "expo-router";
 
 export const SigninScreen = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { addErrorSnackbar, addSuccessSnackbar } = useGlobalSnackbars();
   const [error, setError] = useState<string>("");
-  const { authenticate, setUserData } = useAuth();
+  const { authenticate, setUserData, authState } = useAuth();
+  const [login, { isLoading }] = useLoginMutation();
 
-  const handleSignin = (values: SigninFormValues) => {
-    setIsLoading(true);
-    setError("");
+  const handleSignin = async (values: TSigninPayload) => {
+    try {
+      setError("");
+      const response = await login(values).unwrap();
+      if (response?.data) {
+        setUserData(response.data);
+        await authenticate(response?.token as string);
+        addSuccessSnackbar({
+          message: "Login successful!",
+        });
+        router.replace("/(app)");
+      }
+    } catch (err: any) {
+      const message = err?.data?.message || "Something went wrong!";
+      addErrorSnackbar({ message });
+      setError(message);
+    }
   };
+
   return (
     <ScrollView>
       <Box px="lg">

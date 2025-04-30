@@ -51,7 +51,6 @@ export const InputBox: React.FC<TextInputProps> = React.memo(
       layout,
     ]);
     const props = useRestyle(restyleFunctions, rest);
-    // console.log('calling form input box', placeholder);
 
     return (
       <Box>
