@@ -1,8 +1,8 @@
-import { Box, Text } from "@/components/atom";
+import { Box, Text } from "@/components/atoms";
 import { Stack, useRouter } from "expo-router";
 import { StyleSheet } from "react-native";
 import React from "react";
-import { TouchableOpacity } from "@/components/atom";
+import { TouchableOpacity } from "@/components/atoms";
 
 export default function NotFoundScreen() {
   const router = useRouter();

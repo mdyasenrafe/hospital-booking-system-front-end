@@ -1,6 +1,6 @@
 import { Redirect, Stack, Tabs } from "expo-router";
 import { useAuth, useAuthCheck } from "@/hooks";
-import { Box, LoadingSpinner, Text } from "@/components/atom";
+import { Box, LoadingSpinner, Text } from "@/components/atoms";
 import { BASE_COLORS } from "@/theme/elements";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";

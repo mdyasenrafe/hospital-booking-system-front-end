@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import EyeIcon from "../../../assets/icons/auth/eyeIcon.svg";
 import EyeOffIcon from "../../../assets/icons/auth/eyeOffIcon.svg";
 import { Formik } from "formik";
-import { Button, Row, Text, TouchableOpacity } from "@/components/atom";
+import { Button, Row, Text, TouchableOpacity } from "@/components/atoms";
 import { FormInputBox } from "@/components/forms";
 import { SigninValidationSchema } from "@/schema";
 import { Link } from "expo-router";

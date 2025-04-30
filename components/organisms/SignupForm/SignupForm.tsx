@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { Formik } from "formik";
-import { Button, Row, Text, TouchableOpacity } from "@/components/atom";
+import { Button, Row, Text, TouchableOpacity } from "@/components/atoms";
 import { FormInputBox } from "@/components/forms";
 import { SignupValidationSchema } from "@/schema";
 import { TUser } from "@/contexts/types";

@@ -1,4 +1,4 @@
-import { Text } from "@/components/atom";
+import { Text } from "@/components/atoms";
 import React from "react";
 
 function booking() {

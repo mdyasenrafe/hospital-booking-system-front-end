@@ -1,4 +1,4 @@
-import { KeyboardAwareView, Screen } from "@/components/atom";
+import { KeyboardAwareView, Screen } from "@/components/atoms";
 import { SignupScreen } from "@/components/screens/onboarding";
 
 const Signup = () => {

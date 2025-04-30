@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet } from "react-native";
 import React, { useState } from "react";
-import { Box, RemoteImage, Text } from "@/components/atom";
+import { Box, RemoteImage, Text } from "@/components/atoms";
 import { useAuth } from "@/hooks";
 import Logo from "../../../../assets/images/logo.png";
 import { SigninForm } from "@/components/organisms";

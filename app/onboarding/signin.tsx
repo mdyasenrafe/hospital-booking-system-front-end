@@ -1,4 +1,4 @@
-import { KeyboardAwareView, Screen } from "@/components/atom";
+import { KeyboardAwareView, Screen } from "@/components/atoms";
 import { SigninScreen } from "@/components/screens/onboarding";
 import React, { useState } from "react";
 

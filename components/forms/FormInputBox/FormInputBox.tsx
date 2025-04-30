@@ -1,7 +1,7 @@
 import React, { useState, useCallback, memo } from "react";
 import { useField } from "formik";
-import { InputBox } from "../../atom/InputBox";
-import { TextInputProps } from "../../atom/InputBox/types";
+import { InputBox } from "../../atoms/InputBox";
+import { TextInputProps } from "../../atoms/InputBox/types";
 
 type FormInputBoxProps = TextInputProps & {
   name: string;

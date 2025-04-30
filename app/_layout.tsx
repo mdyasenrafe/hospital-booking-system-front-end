@@ -6,7 +6,7 @@ import { Slot } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider as ReduxProvider } from "react-redux";
 import { Provider, PaperProvider } from "react-native-paper";
-import { GlobalSnackbars } from "@/components/atom/Snackbar/SnackbarContainer";
+import { GlobalSnackbars } from "@/components/atoms/Snackbar/SnackbarContainer";
 
 export default function App() {
   return (
