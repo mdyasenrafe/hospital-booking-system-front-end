@@ -5,6 +5,7 @@ import { useAuth } from "@/hooks";
 import Logo from "../../../../assets/images/logo.png";
 import { SigninForm } from "@/components/organisms";
 import {
+  addToken,
   addUser,
   TSigninPayload,
   useLoginMutation,
@@ -28,6 +29,9 @@ export const SigninScreen = () => {
         dispatch(
           addUser({ user: response?.data, token: response?.token as string })
         );
+        if (response?.token) {
+          dispatch(addToken({ token: response?.token as string }));
+        }
         await authenticate(response?.token as string);
         addSuccessSnackbar({
           message: "Login successful!",

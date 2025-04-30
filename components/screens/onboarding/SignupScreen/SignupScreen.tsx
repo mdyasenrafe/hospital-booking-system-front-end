@@ -5,6 +5,7 @@ import { useAuth } from "@/hooks";
 import Logo from "../../../../assets/images/logo.png";
 import { SignupForm } from "@/components/organisms";
 import {
+  addToken,
   addUser,
   TSignupPayload,
   useSignupMutation,
@@ -28,10 +29,13 @@ export const SignupScreen = () => {
         dispatch(
           addUser({ user: response?.data, token: response?.token as string })
         );
+        if (response?.token) {
+          dispatch(addToken({ token: response?.token as string }));
+        }
         authenticate(response?.token as string);
         addSuccessSnackbar({ message: "Account created successfully!" });
+        router.replace("/(app)");
       }
-      router.replace("/(app)");
     } catch (err: any) {
       console.error(err);
       const message = err?.data?.message || "Something went wrong!";
