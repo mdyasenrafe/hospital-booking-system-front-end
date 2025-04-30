@@ -40,5 +40,4 @@ const FormInputBoxComponent: React.FC<FormInputBoxProps> = ({
   );
 };
 
-// Use React.memo to memoize the component
 export const FormInputBox = memo(FormInputBoxComponent);

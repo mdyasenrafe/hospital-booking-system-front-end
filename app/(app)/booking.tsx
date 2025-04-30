@@ -11,7 +11,7 @@ import { formatDateTime } from "@/components/organisms/AppointmentModal/dateUtil
 export default function BookingsScreen() {
   const { data, isLoading, isError, refetch, error } =
     useGetUserBookingsQuery();
-  console.log(error);
+
   return (
     <Screen name="Bookings">
       <Box flex={1} p="md">
@@ -112,7 +112,6 @@ const statusConfig: Record<TBookingStatus, StatusConfigEntry> = {
   },
 } as const;
 
-// Then update the StatusBadge component
 const StatusBadge = React.memo(({ status }: { status: TBookingStatus }) => {
   const config = statusConfig[status] ?? {
     bg: "grey",
