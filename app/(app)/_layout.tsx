@@ -26,7 +26,6 @@ export default function AppLayout() {
 
   return (
     <Tabs
-      initialRouteName="home"
       screenOptions={({ route }) => ({
         tabBarActiveTintColor: "white",
         tabBarInactiveTintColor: "#e0e0e0",
@@ -41,7 +40,7 @@ export default function AppLayout() {
         tabBarIcon: ({ color, size, focused }) => {
           let iconName: keyof typeof MaterialIcons.glyphMap;
 
-          if (route.name === "home") iconName = "home";
+          if (route.name === "index") iconName = "home";
           else if (route.name === "booking") iconName = "event-note";
           else iconName = "help";
 
@@ -63,12 +62,12 @@ export default function AppLayout() {
               textAlign: "center",
             }}
           >
-            {route.name === "home" ? "Home" : "Booking"}
+            {route.name === "index" ? "Home" : "Booking"}
           </Text>
         ),
       })}
     >
-      <Tabs.Screen name="home" />
+      <Tabs.Screen name="index" />
       <Tabs.Screen name="booking" />
     </Tabs>
   );
