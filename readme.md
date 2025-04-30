@@ -75,6 +75,8 @@ hospital-booking-system-front-end/
 ```
 
 ## Explanation
+
+```
 - **assets/**: Contains static assets like images, fonts, and icons used throughout the project.
 - **components/**: Organized according to Atomic Design:
     - **atom/**: Basic UI elements that serve as the building blocks.
@@ -101,7 +103,7 @@ The root component that bootstraps the application.
 
 - **index.js:**
 The main entry point of the app.
-
+```
 
 ## Components Usage
 
