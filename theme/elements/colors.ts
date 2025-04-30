@@ -23,9 +23,12 @@ export const palette = {
   purple100: "#faf5ff",
   purple500: "#805AD5",
 
-  // ✅ New additions
   grayLight: "#E0E0E0",
   textDark: "#424242",
+  textSecondary: "#757575",
+  orangeLight: "#FEEDE5",
+  redLight: "#FCE8E6",
+  orange: "#EC9126",
 };
 
 export const BASE_COLORS = {
@@ -61,6 +64,9 @@ export const BASE_COLORS = {
   primaryGlass: palette.primaryGlass,
   grayLight: palette.grayLight,
   textDark: palette.textDark,
+  textSecondary: palette.textSecondary,
+  orangeLight: palette.orangeLight,
+  redLight: palette.redLight,
 };
 
 export const DARK_THEME = {

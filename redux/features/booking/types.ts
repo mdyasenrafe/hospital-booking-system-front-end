@@ -1,10 +1,15 @@
+import { TUser } from "../auth";
+import { THospital } from "../hospital/types";
+
+export type TBookingStatus = "pending" | "confirmed" | "cancelled";
+
 export type TBooking = {
   _id: string;
-  user: string;
-  hospital: string;
+  user: TUser;
+  hospital: THospital;
   service: string;
   appointmentDate: Date;
-  status: "pending" | "confirmed" | "cancelled";
+  status: TBookingStatus;
   createdAt: Date;
 };
 

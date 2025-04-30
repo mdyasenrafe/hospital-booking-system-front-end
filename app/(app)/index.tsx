@@ -1,4 +1,3 @@
-// screens/HomeScreen.tsx
 import React from "react";
 import { FlatList } from "react-native";
 import { useAuth } from "@/hooks";
