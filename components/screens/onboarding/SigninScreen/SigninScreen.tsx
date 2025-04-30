@@ -24,7 +24,7 @@ export const SigninScreen = () => {
         addSuccessSnackbar({
           message: "Login successful!",
         });
-        router.replace("/(app)");
+        router.replace("/(app)/home");
       }
     } catch (err: any) {
       const message = err?.data?.message || "Something went wrong!";

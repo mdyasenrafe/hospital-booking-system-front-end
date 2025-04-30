@@ -23,7 +23,7 @@ export const SignupScreen = () => {
         authenticate(response?.token as string);
         addSuccessSnackbar({ message: "Account created successfully!" });
       }
-      router.replace("/(app)");
+      router.replace("/(app)/home");
     } catch (err: any) {
       console.error(err);
       const message = err?.data?.message || "Something went wrong!";
