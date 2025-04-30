@@ -4,13 +4,14 @@ import { Feather } from "@expo/vector-icons";
 import { useAuth } from "@/hooks";
 import { Text } from "@/components/atoms/Text";
 import { useGetHospitalsQuery } from "@/redux/features/hospital/hospitalApi";
-import { Box, Screen } from "@/components/atoms";
+import { Box, LoadingSpinner, Screen } from "@/components/atoms";
 import { AppointmentModal } from "@/components/organisms";
-
-const dummyUserName = "John Doe";
+import { useAppSelector } from "@/redux";
+import { getCurrentUser } from "@/redux/features/auth";
 
 export default function Home() {
   const { signOut } = useAuth();
+  const currentUser = useAppSelector(getCurrentUser);
   const { data, isLoading, error } = useGetHospitalsQuery();
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -40,7 +41,7 @@ export default function Home() {
               color="black"
               style={{ marginRight: 8 }}
             />
-            <Text variant="p2_medium">Welcome, {dummyUserName}</Text>
+            <Text variant="p2_medium">Welcome, {currentUser?.name}</Text>
           </Box>
           <Text
             onPress={signOut}
@@ -51,14 +52,13 @@ export default function Home() {
           </Text>
         </Box>
 
-        {/* Title */}
         <Text variant="h4" mb="sm">
           Nearby Hospitals
         </Text>
 
         {/* Hospital List */}
         {isLoading ? (
-          <Text variant="p3">Loading...</Text>
+          <LoadingSpinner size="large" />
         ) : error ? (
           <Text variant="p3" color="red">
             Failed to load hospitals
