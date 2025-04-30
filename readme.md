@@ -13,6 +13,7 @@
 9. [API Integration](#api-integration)  
 10. [Authentication](#authentication)  
 11. [Theme and Styling](#theme-and-styling)  
+12. [Test Account Credentials](#test-account-credentials)
 
 
 
@@ -237,7 +238,11 @@ DELETE /bookings/:id
 - Orientation handling
 
 
+##  Test Account Credentials
 
+  ### User Account
+- Email: test@test.com
+- Password: 123456
 
 
 *This project was developed as part of a technical assessment for Essex Studios.*
