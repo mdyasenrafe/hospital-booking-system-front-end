@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { Box, CenterModal, TouchableOpacity } from "@/components/atoms";
-import { Text } from "@/components/atoms/Text";
-import { Button } from "@/components/atoms/Button";
-import { Feather } from "@expo/vector-icons";
-import { palette } from "@/theme/elements";
-import { useCreateBookingMutation } from "@/redux/features/booking";
 import { useGlobalSnackbars } from "@/contexts/SnackbarContext";
+import { useCreateBookingMutation } from "@/redux/features/booking";
+import {
+  Box,
+  CenterModal,
+  TouchableOpacity,
+  Text,
+  Button,
+} from "@/components/atoms";
+import { palette } from "@/theme/elements";
+import { Feather } from "@expo/vector-icons";
+import { formatDateTime } from "./dateUtils";
 
 type AppointmentModalProps = {
   isVisible: boolean;
@@ -23,8 +28,8 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
   serviceName,
   hospitalId,
 }) => {
-  const [date, setDate] = useState(new Date());
-  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [date, setDate] = React.useState(new Date());
+  const [showDatePicker, setShowDatePicker] = React.useState(false);
   const [createBooking, { isLoading }] = useCreateBookingMutation();
   const { addSnackbar } = useGlobalSnackbars();
 
@@ -55,6 +60,7 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
       <Box p="lg" borderRadius="xl">
         <Box alignItems="center" mb="md">
           <TouchableOpacity
+            accessibilityLabel="Close modal"
             backgroundColor="primaryLight2"
             p="sm"
             borderRadius="full"
@@ -66,47 +72,20 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
           <Text variant="h5">Book Appointment</Text>
         </Box>
 
-        <Box mb="md">
-          <Text variant="p3_medium" mb="xs">
-            <Text variant="p3_bold">Hospital:</Text> {hospitalName}
-          </Text>
-          <Text variant="p3_medium">
-            <Text variant="p3_bold">Service:</Text> {serviceName}
-          </Text>
-        </Box>
+        <HospitalServiceInfo
+          hospitalName={hospitalName}
+          serviceName={serviceName}
+        />
 
-        <Box height={1} backgroundColor="grayLight" mb="md" />
+        <DatePickerSection
+          date={date}
+          showDatePicker={showDatePicker}
+          onDateChange={setDate}
+          onTogglePicker={setShowDatePicker}
+        />
 
-        <Box mb="lg">
-          <Text variant="p3_bold" mb="xs">
-            Select Date & Time
-          </Text>
-          <Box
-            borderWidth={1}
-            borderColor="primary"
-            borderRadius="md"
-            p="sm"
-            backgroundColor="white"
-            onTouchStart={() => setShowDatePicker(true)}
-          >
-            <Text variant="p3_medium">{date.toLocaleString()}</Text>
-          </Box>
-          <DateTimePickerModal
-            isVisible={showDatePicker}
-            mode="datetime"
-            date={date}
-            onConfirm={(selectedDate) => {
-              setDate(selectedDate);
-              setShowDatePicker(false);
-            }}
-            onCancel={() => setShowDatePicker(false)}
-            minimumDate={new Date()}
-          />
-        </Box>
-
-        {/* Confirm */}
         <Button
-          label="Confirm Appointment"
+          label={isLoading ? "Booking..." : "Confirm Appointment"}
           onPress={handleConfirm}
           backgroundColor="primary"
           borderRadius="md"
@@ -121,3 +100,66 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
     </CenterModal>
   );
 };
+
+const HospitalServiceInfo = React.memo(
+  ({
+    hospitalName,
+    serviceName,
+  }: Pick<AppointmentModalProps, "hospitalName" | "serviceName">) => (
+    <Box mb="md">
+      <Text variant="p3_medium" mb="xs">
+        <Text variant="p3_bold">Hospital:</Text> {hospitalName}
+      </Text>
+      <Text variant="p3_medium">
+        <Text variant="p3_bold">Service:</Text> {serviceName}
+      </Text>
+      <Box height={1} backgroundColor="grayLight" mb="md" />
+    </Box>
+  )
+);
+
+const DatePickerSection = React.memo(
+  ({
+    date,
+    showDatePicker,
+    onDateChange,
+    onTogglePicker,
+  }: {
+    date: Date;
+    showDatePicker: boolean;
+    onDateChange: (date: Date) => void;
+    onTogglePicker: (show: boolean) => void;
+  }) => (
+    <Box mb="lg">
+      <Text variant="p3_bold" mb="xs">
+        Select Date & Time
+      </Text>
+      <TouchableOpacity
+        accessible
+        accessibilityLabel="Select appointment date"
+        onPress={() => onTogglePicker(true)}
+      >
+        <Box
+          borderWidth={1}
+          borderColor="primary"
+          borderRadius="md"
+          p="sm"
+          backgroundColor="white"
+        >
+          <Text variant="p3_medium">{formatDateTime(date)}</Text>
+        </Box>
+      </TouchableOpacity>
+      <DateTimePickerModal
+        isVisible={showDatePicker}
+        mode="datetime"
+        date={date}
+        onConfirm={(selectedDate) => {
+          onDateChange(selectedDate);
+          onTogglePicker(false);
+        }}
+        onCancel={() => onTogglePicker(false)}
+        minimumDate={new Date()}
+      />
+    </Box>
+  )
+);
