@@ -6,7 +6,7 @@ const hospitalApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getHospitals: builder.query<TResponse<THospital[]>, void>({
       query: () => ({
-        url: "/hospitals",
+        url: "/hospital",
         method: "GET",
       }),
     }),

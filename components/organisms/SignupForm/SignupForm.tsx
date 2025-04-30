@@ -3,7 +3,6 @@ import { Formik } from "formik";
 import { Button, Row, Text, TouchableOpacity } from "@/components/atoms";
 import { FormInputBox } from "@/components/forms";
 import { SignupValidationSchema } from "@/schema";
-import { TUser } from "@/contexts/types";
 import EyeIcon from "../../../assets/icons/auth/eyeIcon.svg";
 import EyeOffIcon from "../../../assets/icons/auth/eyeOffIcon.svg";
 import { Link } from "expo-router";

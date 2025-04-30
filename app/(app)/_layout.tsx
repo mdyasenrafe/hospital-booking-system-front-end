@@ -15,7 +15,6 @@ export default function AppLayout() {
   const { bottom } = useSafeAreaInsets();
   const { authState } = useAuth();
   const { loading } = useAuthCheck();
-  console.log("comming");
   if (loading) {
     return <LoadingSpinner />;
   }
