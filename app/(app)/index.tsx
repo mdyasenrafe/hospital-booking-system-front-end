@@ -16,12 +16,17 @@ export default function Home() {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedHospital, setSelectedHospital] = useState<{
+    hospitalId: string;
     hospitalName: string;
     serviceName: string;
   } | null>(null);
 
-  const openBookingModal = (hospitalName: string, serviceName: string) => {
-    setSelectedHospital({ hospitalName, serviceName });
+  const openBookingModal = (
+    hospitalId: string,
+    hospitalName: string,
+    serviceName: string
+  ) => {
+    setSelectedHospital({ hospitalId, hospitalName, serviceName });
     setModalVisible(true);
   };
 
@@ -100,7 +105,9 @@ export default function Home() {
                     >
                       <Text
                         variant="p4_white"
-                        onPress={() => openBookingModal(item.name, service)}
+                        onPress={() =>
+                          openBookingModal(item._id, item.name, service)
+                        }
                       >
                         Book: {service}
                       </Text>
@@ -116,6 +123,7 @@ export default function Home() {
         <AppointmentModal
           isVisible={modalVisible}
           onClose={() => setModalVisible(false)}
+          hospitalId={selectedHospital.hospitalId}
           hospitalName={selectedHospital.hospitalName}
           serviceName={selectedHospital.serviceName}
         />

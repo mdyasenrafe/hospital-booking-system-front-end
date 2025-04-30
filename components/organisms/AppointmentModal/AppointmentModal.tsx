@@ -5,12 +5,15 @@ import { Text } from "@/components/atoms/Text";
 import { Button } from "@/components/atoms/Button";
 import { Feather } from "@expo/vector-icons";
 import { palette } from "@/theme/elements";
+import { useCreateBookingMutation } from "@/redux/features/booking";
+import { useGlobalSnackbars } from "@/contexts/SnackbarContext";
 
 type AppointmentModalProps = {
   isVisible: boolean;
   onClose: () => void;
   hospitalName: string;
   serviceName: string;
+  hospitalId: string;
 };
 
 export const AppointmentModal: React.FC<AppointmentModalProps> = ({
@@ -18,13 +21,33 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
   onClose,
   hospitalName,
   serviceName,
+  hospitalId,
 }) => {
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [createBooking, { isLoading }] = useCreateBookingMutation();
+  const { addSnackbar } = useGlobalSnackbars();
 
-  const handleConfirm = () => {
-    console.log("Booked:", { hospitalName, serviceName, date });
-    onClose();
+  const handleConfirm = async () => {
+    try {
+      await createBooking({
+        hospital: hospitalId,
+        service: serviceName,
+        appointmentDate: date,
+      }).unwrap();
+
+      addSnackbar({
+        message: "Appointment booked successfully!",
+        type: "success",
+      });
+      onClose();
+    } catch (error) {
+      addSnackbar({
+        message: "Failed to book appointment. Please try again.",
+        type: "error",
+      });
+      console.error("Booking error:", error);
+    }
   };
 
   return (
@@ -91,6 +114,8 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
           paddingHorizontal="lg"
           style={{ width: "100%" }}
           variant="buttonWhiteLabel"
+          isLoading={isLoading}
+          isDisabled={isLoading}
         />
       </Box>
     </CenterModal>
