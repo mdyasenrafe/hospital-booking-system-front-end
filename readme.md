@@ -49,7 +49,7 @@ A mobile app built with React Native and Expo that lets users book hospital appo
 For detailed installation instructions and setup steps, please refer to the [Installation Guide](https://github.com/mdyasenrafe/hospital-booking-system-front-end/blob/main/installation.md).
 
 ## Project Structure
-```
+```plaintext
 hospital-booking-system-front-end/
 ├── app/                    # App screens and navigation
 │   ├── (auth)/            # Authentication screens
@@ -75,8 +75,6 @@ hospital-booking-system-front-end/
 ```
 
 ## Explanation
-
-```
 - **assets/**: Contains static assets like images, fonts, and icons used throughout the project.
 - **components/**: Organized according to Atomic Design:
     - **atom/**: Basic UI elements that serve as the building blocks.
@@ -103,7 +101,6 @@ The root component that bootstraps the application.
 
 - **index.js:**
 The main entry point of the app.
-```
 
 ## Components Usage
 
