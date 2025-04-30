@@ -8,3 +8,4 @@ export * from "./TouchableOpacity";
 export * from "./InputBox";
 export * from "./RemoteImage";
 export * from "./KeyboardAwareView";
+export * from "./CenterModal";
