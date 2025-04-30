@@ -15,21 +15,20 @@ type RequiredWithPartial<T, K extends keyof T> = Required<
 type CenterModalProps = {
   children?: React.ReactNode;
 } & RequiredWithPartial<BaseModal, "onClose">;
+
 export const CenterModal = memo(
   ({ isVisible, onClose, children }: CenterModalProps) => {
     return (
-      <Portal>
-        <Modal
-          contentContainerStyle={[
-            styles.centerModal,
-            { backgroundColor: "white" },
-          ]}
-          visible={isVisible}
-          onDismiss={onClose}
-        >
-          {children}
-        </Modal>
-      </Portal>
+      <Modal
+        contentContainerStyle={[
+          styles.centerModal,
+          { backgroundColor: "white" },
+        ]}
+        visible={isVisible}
+        onDismiss={onClose}
+      >
+        {children}
+      </Modal>
     );
   }
 );

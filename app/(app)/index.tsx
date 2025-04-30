@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { FlatList } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useAuth } from "@/hooks";
 import { Text } from "@/components/atoms/Text";
 import { useGetHospitalsQuery } from "@/redux/features/hospital/hospitalApi";
 import { Box, Screen } from "@/components/atoms";
+import { AppointmentModal } from "@/components/organisms";
 
 const dummyUserName = "John Doe";
 
 export default function Home() {
   const { signOut } = useAuth();
   const { data, isLoading, error } = useGetHospitalsQuery();
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedHospital, setSelectedHospital] = useState<{
+    hospitalName: string;
+    serviceName: string;
+  } | null>(null);
+
+  const openBookingModal = (hospitalName: string, serviceName: string) => {
+    setSelectedHospital({ hospitalName, serviceName });
+    setModalVisible(true);
+  };
 
   return (
     <Screen name="Home">
@@ -57,27 +69,57 @@ export default function Home() {
             keyExtractor={(item) => item._id}
             renderItem={({ item }) => (
               <Box
-                backgroundColor="primary"
+                backgroundColor="white"
+                borderRadius="xl"
+                mb="md"
                 p="md"
-                borderRadius={"xl"}
-                mb="sm"
                 shadowColor="black"
                 shadowOffset={{ width: 0, height: 2 }}
-                shadowOpacity={0.1}
+                shadowOpacity={0.05}
                 shadowRadius={4}
+                borderWidth={1}
+                borderColor="grayLight"
               >
-                <Text variant="p2_medium" color="white">
+                <Text variant="p3_bold" mb="xs">
                   {item.name}
                 </Text>
-                <Text variant="p4_white">{item.address}</Text>
-                <Text variant="p4_white">
-                  Services: {item.services.join(", ")}
+                <Text variant="p4" color="textDark" mb="sm">
+                  {item.address}
                 </Text>
+
+                <Box flexDirection="row" flexWrap="wrap" gap="xs">
+                  {item.services.map((service, idx) => (
+                    <Box
+                      key={idx}
+                      backgroundColor="primary"
+                      borderRadius="md"
+                      px="sm"
+                      py="xs"
+                      mr="xs"
+                      mt="xs"
+                    >
+                      <Text
+                        variant="p4_white"
+                        onPress={() => openBookingModal(item.name, service)}
+                      >
+                        Book: {service}
+                      </Text>
+                    </Box>
+                  ))}
+                </Box>
               </Box>
             )}
           />
         )}
       </Box>
+      {selectedHospital && (
+        <AppointmentModal
+          isVisible={modalVisible}
+          onClose={() => setModalVisible(false)}
+          hospitalName={selectedHospital.hospitalName}
+          serviceName={selectedHospital.serviceName}
+        />
+      )}
     </Screen>
   );
 }

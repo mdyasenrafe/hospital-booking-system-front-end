@@ -22,6 +22,10 @@ export const palette = {
   green500: "#38A169",
   purple100: "#faf5ff",
   purple500: "#805AD5",
+
+  // ✅ New additions
+  grayLight: "#E0E0E0",
+  textDark: "#424242",
 };
 
 export const BASE_COLORS = {
@@ -55,6 +59,8 @@ export const BASE_COLORS = {
   tabsBackground: palette.tabsBackground,
   antiFlashWhite: palette.antiFlashWhite,
   primaryGlass: palette.primaryGlass,
+  grayLight: palette.grayLight,
+  textDark: palette.textDark,
 };
 
 export const DARK_THEME = {

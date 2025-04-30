@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 import {
   ActivityIndicator,
   StyleSheet,
   TouchableOpacity,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 import {
   useRestyle,
   backgroundColor,
@@ -16,10 +16,10 @@ import {
   SpacingProps,
   LayoutProps,
   layout,
-} from '@shopify/restyle';
-import {Theme} from '../../../theme';
-import {Text, TextProps} from '../Text';
-import {palette} from '../../../theme/elements';
+} from "@shopify/restyle";
+import { Theme } from "../../../theme";
+import { Text, TextProps } from "../Text";
+import { palette } from "../../../theme/elements";
 
 type RestyleProps = SpacingProps<Theme> &
   BorderProps<Theme> &
@@ -38,10 +38,10 @@ const restyleFunctions = composeRestyleFunctions<Theme, RestyleProps>([
 interface ButtonProps extends RestyleProps {
   onPress?: () => void;
   label: string;
-  variant?: TextProps['variant'];
+  variant?: TextProps["variant"];
   isLoading?: boolean;
   isDisabled?: boolean;
-  loadingColor?: 'primary' | 'white';
+  loadingColor?: "primary" | "white";
   icon?: boolean;
   iconComponent?: React.ReactNode;
 }
@@ -49,7 +49,7 @@ interface ButtonProps extends RestyleProps {
 export const Button: React.FC<ButtonProps> = ({
   onPress,
   label,
-  variant = 'buttonLabel',
+  variant = "buttonLabel",
   isLoading,
   isDisabled,
   loadingColor,
@@ -64,10 +64,11 @@ export const Button: React.FC<ButtonProps> = ({
       onPress={onPress}
       {...props}
       disabled={isDisabled}
-      style={[styles.container, props.style]}>
+      style={[styles.container, props.style]}
+    >
       {isLoading ? (
         <ActivityIndicator
-          color={loadingColor === 'primary' ? palette.primary : 'white'}
+          color={loadingColor === "primary" ? palette.primary : "white"}
         />
       ) : (
         <>
@@ -81,8 +82,8 @@ export const Button: React.FC<ButtonProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
   },
 });
