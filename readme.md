@@ -46,10 +46,10 @@ A mobile app built with React Native and Expo that lets users book hospital appo
 
 ## Installation
 
-For detailed installation instructions and setup steps, please refer to the [Installation Guide]().
+For detailed installation instructions and setup steps, please refer to the [Installation Guide](https://github.com/mdyasenrafe/hospital-booking-system-front-end/blob/main/installation.md).
 
 ## Project Structure
-
+```
 hospital-booking-system-front-end/
 ├── app/                    # App screens and navigation
 │   ├── (auth)/            # Authentication screens
@@ -198,7 +198,7 @@ import { Button } from 'components';
 
 ### Endpoints Structure
 ```typescript
-BASE_URL = 'https://task-hospital.vercel.app/'
+BASE_URL = 'https://task-hospital.vercel.app/api'
 
 // Authentication
 POST   /auth/login
